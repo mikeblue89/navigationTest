@@ -30,8 +30,8 @@ const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  
-  const onTabPress = ()=>{
+
+  const onTabPress = () => {
     console.log('Se Presiono un boton');
   };
 
@@ -53,7 +53,7 @@ const App: () => Node = () => {
         <MainStack />
       </View>
       <View style={styles.thirdSection}>
-        <Tabs onTabPress={onTabPress}/>
+        <Tabs onTabPress={onTabPress} />
       </View>
     </View>
   );
