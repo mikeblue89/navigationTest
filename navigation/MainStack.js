@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../screens/Home';
 import ScanScreen from '../screens/ScanScreen';
 import { StyleSheet, Icon } from 'react-native';
+import QrMainScreen from '../screens/QrMainScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +41,7 @@ const MainStack = () => {
             },
           }}
         />
+        <Stack.Screen name="QRMain" component={QrMainScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

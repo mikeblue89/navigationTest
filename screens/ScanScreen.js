@@ -29,7 +29,7 @@ const ScanScreen = () => {
         },
       ]}
     >
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      {/* <View style={{ flex: 1, alignItems: 'center' }}>
         <Text
           style={{
             color: 'black',
@@ -40,8 +40,8 @@ const ScanScreen = () => {
         >
           Scan Screen
         </Text>
-      </View>
-      <View style={{ flex: 6 }}>
+      </View> */}
+      <View style={{ flex: 1 }}>
         <QRCodeScanner
           onRead={onCheckResults}
           flashMode={RNCamera.Constants.FlashMode.auto}

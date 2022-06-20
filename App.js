@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
@@ -11,16 +12,27 @@
 
 import React from 'react';
 import type { Node } from 'react';
-import { StyleSheet, useColorScheme, View, Text } from 'react-native';
-
+import {
+  StyleSheet,
+  useColorScheme,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import MainStack from './navigation/MainStack';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Tabs from './components/Tabs';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+  
+  const onTabPress = ()=>{
+    console.log('Se Presiono un boton');
   };
 
   return (
@@ -33,13 +45,15 @@ const App: () => Node = () => {
       ]}
     >
       <View style={styles.firstSection}>
-        <Text style={styles.sectionTitle}>Menu Component</Text>
+        <Text style={styles.sectionTitle}>
+          <Icon name="menu" size={30}></Icon>
+        </Text>
       </View>
       <View style={styles.secondSection}>
         <MainStack />
       </View>
       <View style={styles.thirdSection}>
-        <Text style={styles.sectionDescription}>Tabs Component</Text>
+        <Tabs onTabPress={onTabPress}/>
       </View>
     </View>
   );
@@ -64,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent: 'center',
-    borderColor: 'black',
+    borderColor: '#D4D6D1',
     borderWidth: 1,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -74,8 +88,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+    position: 'absolute',
+    left: 15,
     color: 'white',
   },
   sectionDescription: {
