@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
@@ -6,20 +7,35 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
 
-const ScanScreen = () => {
-  const [name, setName] = useState('');
-  const [peso, setPeso] = useState(null);
+const ScanScreen = ({ navigation }) => {
   const [loading, setLoad] = useState(true);
 
-  useEffect(() => {}, [loading]);
-  const onCheckResults = e => {
-    const response = JSON.parse(e.data);
-    console.log(typeof response);
-    console.log(RNCamera.Constants.FlashMode.on);
-    setName(response.Hola);
-    setPeso(response.Heigth);
-    setLoad(false);
+  const jsonChecker = data => {
+    try {
+      JSON.parse(data);
+    } catch (e) {
+      return false;
+    }
+    return true;
   };
+
+  useEffect(() => {}, [loading]);
+
+  const onCheckResults = e => {
+    const jsonResult = jsonChecker(e.data);
+
+    if (jsonResult) {
+      // setJsonRequest(JSON.parse(e.data));
+      // console.log('Json: ', jsonRequest);
+    } else {
+      let rawData = e.data.split('-');
+      navigation.navigate('ClaimModule',{
+        OrderNumber: parseInt(rawData[0]),
+        DeliveryNuber: parseInt(rawData[1]),
+      });
+    }
+  };
+
   return (
     <View
       style={[
@@ -29,18 +45,6 @@ const ScanScreen = () => {
         },
       ]}
     >
-      {/* <View style={{ flex: 1, alignItems: 'center' }}>
-        <Text
-          style={{
-            color: 'black',
-            fontSize: 18,
-            fontWeight: 'bold',
-            paddingTop: 50,
-          }}
-        >
-          Scan Screen
-        </Text>
-      </View> */}
       <View style={{ flex: 1 }}>
         <QRCodeScanner
           onRead={onCheckResults}

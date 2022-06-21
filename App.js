@@ -52,9 +52,9 @@ const App: () => Node = () => {
       <View style={styles.secondSection}>
         <MainStack />
       </View>
-      <View style={styles.thirdSection}>
+      {/* <View style={styles.thirdSection}>
         <Tabs onTabPress={onTabPress} />
-      </View>
+      </View> */}
     </View>
   );
 };

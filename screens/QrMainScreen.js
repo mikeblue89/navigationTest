@@ -30,7 +30,7 @@ const QrMainScreen = ({navigation}) => {
           size={190}
         ></Icon>
         <TouchableOpacity style={styles.btn} onPress={() => {
-          navigation.navigate('Scan');
+          navigation.navigate('ScanModule');
         }}>
           <Text style={styles.buttonLabel}>
             <Icon name="qrcode-scan" size={25}></Icon> Identificar documento

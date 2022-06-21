@@ -1,48 +1,40 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../screens/Home';
-import ScanScreen from '../screens/ScanScreen';
-import { StyleSheet, Icon } from 'react-native';
-import QrMainScreen from '../screens/QrMainScreen';
 
-const Stack = createNativeStackNavigator();
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { StyleSheet } from 'react-native';
+import { MainScreen, ProfileScreen } from './MainNavigation';
+
+const Tab = createBottomTabNavigator();
 
 const MainStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
           headerShown: false,
-        }}
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            switch (route.name) {
+              case 'Home':
+                iconName = focused ? 'home' : 'home-outline';
+                break;
+              case 'Perfil':
+                iconName = focused ? 'person-circle' : 'person-circle-outline';
+                break;
+              default:
+            }
+            return <Icon name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: '#fc141c',
+          tabBarInactiveTintColor: 'gray',
+        })}
       >
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            title: 'Home',
-            headerStyle: styles.customHeader,
-            headerTintColor: 'white',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Scan"
-          component={ScanScreen}
-          options={{
-            title: 'Scan',
-            headerStyle: styles.customHeader,
-            headerTintColor: 'white',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen name="QRMain" component={QrMainScreen} />
-      </Stack.Navigator>
+        <Tab.Screen name="Home" component={MainScreen} />
+        <Tab.Screen name="Perfil" component={ProfileScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
